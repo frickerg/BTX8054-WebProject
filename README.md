@@ -8,18 +8,18 @@ Download the following zip file subjectHomework.zip. It contains a minimal appli
 # TO DO
 You have to realy improve the program in the direction you want.
 Minimal requirements:
-..* Better layout for the pages (the patient page is particularly ugly),
-..* Insert a new vital sign for a patient,
-..* Add list of medicines for a patient,
-..* Possibility to include new medicines (medicament, quantity taken, who did order, who gave the medicament, ...).
+- Better layout for the pages (the patient page is particularly ugly),
+- Insert a new vital sign for a patient,
+- Add list of medicines for a patient,
+- Possibility to include new medicines (medicament, quantity taken, who did order, who gave the medicament, ...).
 
 It is particularly important to improve the usablity of the page. 
 Maximal: the sky is the limit! I'd like to be astonished!
 Ideas:
-..* Include a graph representing each of the vital signs (temperature, puls,...)
-..* Insert new patients, and or new staff members.
-..* Use json or Ajax for communicating with the server.
-..* ...
+- Include a graph representing each of the vital signs (temperature, puls,...)
+- Insert new patients, and or new staff members.
+- Use json or Ajax for communicating with the server.
+- ...
 
 # Conditions
 This work must be done using PHP, the connection with the data base must use PDO's prepared statements (take care of SQL-injection).
