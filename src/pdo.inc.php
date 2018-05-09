@@ -9,4 +9,4 @@ $username = 'root';
 $password = '';
 
 $dbname = 'medizininformatik';
-?>
+?> 
