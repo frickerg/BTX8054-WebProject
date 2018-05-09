@@ -58,64 +58,62 @@ try {
 }
 
 ?>
-<h2> Exercise 1</h2>
-Buttons for displaying just an alert.<br>
-<button onclick="alert('Temperature');">Temperature</button>
-  <button onclick="alert('Pulse');">Pulse</button><button onclick="alert('Activity');">Activity</button>
+	<h2> Exercise 1</h2> Buttons for displaying just an alert.<br>
+	<button onclick="alert('Temperature');">Temperature</button>
+	<button onclick="alert('Pulse');">Pulse</button><button onclick="alert('Activity');">Activity</button>
 
-<br>
-<script>
-  function writeMessage(msg){
-    document.getElementById("sign").textContent=msg;
-  }
-  </script>
-  <h3 id="sign">Test </h3>
-  Buttons for displaying in the previous H3 placeholder.<br>
-<button onclick="writeMessage('Temperature');">Temperature</button>
-  <button onclick="writeMessage('Pulse');">Pulse</button><button onclick="writeMessage('Activity');">Activity</button>
+	<br>
+	<script>
+		function writeMessage(msg) {
+			document.getElementById("sign").textContent = msg;
+		}
+	</script>
+	<h3 id="sign">Test </h3> Buttons for displaying in the previous H3 placeholder.<br>
+	<button onclick="writeMessage('Temperature');">Temperature</button>
+	<button onclick="writeMessage('Pulse');">Pulse</button><button onclick="writeMessage('Activity');">Activity</button>
 
 
-<h2> Exercise 2</h2>
-<script>
-  function displayVitalSigns(sign){
-    var list = document.getElementsByClassName("signs");
-    for(var i in list){
-      if(list[i].style !== undefined){
-	list[i].style.display="none";
-      }
-    }
-    var list2 = document.getElementsByClassName(sign);
-    if(list2){
-      for(var i2 in list2){
-	if(list2[i2].style !== undefined){
-	  list2[i2].style.display="block";
-	}
-      }
-    }
-    else{
-      alert('no list');
-    }
-  }
-  </script>
-<style>
-.Temperature {
-    display: none;
-    }
-.Pulse {
-    display: none;
- }
-  .Activity {
-        display: none;
+	<h2> Exercise 2</h2>
+	<script>
+		function displayVitalSigns(sign) {
+			var list = document.getElementsByClassName("signs");
+			for (var i in list) {
+				if (list[i].style !== undefined) {
+					list[i].style.display = "none";
+				}
+			}
+			var list2 = document.getElementsByClassName(sign);
+			if (list2) {
+				for (var i2 in list2) {
+					if (list2[i2].style !== undefined) {
+						list2[i2].style.display = "block";
+					}
+				}
+			} else {
+				alert('no list');
+			}
+		}
+	</script>
+	<style>
+		.Temperature {
+			display: none;
+		}
 
-       }
+		.Pulse {
+			display: none;
+		}
 
-  </style>
+		.Activity {
+			display: none;
 
-Buttons for displaying just an alert.<br>
-<button onclick="displayVitalSigns('Temperature');">Temperature</button>
-  <button onclick="displayVitalSigns('Pulse');">Pulse</button><button onclick="displayVitalSigns('Activity');">Activity</button>
+		}
+	</style>
 
-<?php
+	Buttons for displaying just an alert.<br>
+	<button onclick="displayVitalSigns('Temperature');">Temperature</button>
+	<button onclick="displayVitalSigns('Pulse');">Pulse</button><button onclick="displayVitalSigns('Activity');">Activity</button>
+
+	<?php
   try {
       if ($patientID > 0) {
           $sql = 'SELECT name, first_name, value, time, sign_name
@@ -143,5 +141,5 @@ Buttons for displaying just an alert.<br>
 
   ?>
 
-<br />
-<i><a href="logout.php">Logout</a></i>
+		<br />
+		<i><a href="logout.php">Logout</a></i>

@@ -62,17 +62,17 @@ if (!$logged) {
 // the form is only displayed if the person is not logged.
 if (!$logged) {
     ?>
-  <h1>Medizininformatik Data Base: Login page</h1>
+	<h1>Medizininformatik Data Base: Login page</h1>
 
-    <form method='POST'>
-<pre>
+	<form method='POST'>
+		<pre>
     Username: <input type="text" name="user">
     Password: <input type="password" name="pwd">
    <input type="submit" value="Login">
 </pre>
-   </form>
+	</form>
 
-   <?php
+	<?php
     echo "<b>$message</b>";
 }
   ?>
