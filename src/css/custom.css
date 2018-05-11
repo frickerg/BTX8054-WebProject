@@ -34,3 +34,15 @@ body {
 	width: 150px;
 	margin-top: 40px;
 }
+
+.signs {
+    display: none;
+}
+
+#warning {
+    padding: 20px;
+    background-color: pink;
+    border: 1px solid red;
+    border-radius: 5px;
+    color: red;
+}

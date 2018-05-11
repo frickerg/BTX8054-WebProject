@@ -1,149 +1,118 @@
+<?php include 'template/base.php'; ?>
+
+<div class="navbar">
+	<a href="listPatients.php">Home</a>
+	<a href="logout.php">Logout</a>
+</div>
+
+
 <?php
-include 'template/base.php';
-
-session_start();
-
-// First, we test if user is logged. If not, goto main.php (login page).
-if (!isset($_SESSION['user'])) {
-    header('Location: main.php');
-    //echo "problem with user";
-    exit();
-}
-
-include 'pdo.inc.php';
-
-try {
-    $dbh = new PDO("mysql:host=$hostname;dbname=$dbname", $username, $password);
-    $patientID = 0;
-    if (isset($_GET['id'])) {
-        $patientID = (int) ($_GET['id']);
+    session_start();
+    // First, we test if user is logged. If not, goto main.php (login page).
+    if (!isset($_SESSION['user'])) {
+        header('Location: index.php');
+        exit();
     }
-    if ($patientID > 0) {
-        $sql0 = 'SELECT name, first_name
-  FROM patient
-  WHERE patient.patientID = :patientID';
-
-        $statement0 = $dbh->prepare($sql0);
-        $statement0->bindParam(':patientID', $patientID, PDO::PARAM_INT);
-        $result0 = $statement0->execute();
-
-        while ($line = $statement0->fetch()) {
-            echo '<h1> Patient : '.$line['first_name'].'  '.$line['name'].'</h1>';
-
-            echo "<br>\n";
-        }
-
-        /*** echo a message saying we have connected ***/
-        $sql = 'SELECT name, first_name, value, time, sign_name
-  FROM patient, vital_sign, sign
-  WHERE patient.patientID = vital_sign.patientID
-    AND vital_sign.signID = sign.signID
-    AND patient.patientID = :patientID';
-
-        $statement = $dbh->prepare($sql);
-        $statement->bindParam(':patientID', $patientID, PDO::PARAM_INT);
-        $result = $statement->execute();
-
-        while ($line = $statement->fetch()) {
-            echo $line['sign_name'].' = '.$line['value'].' at '.$line['time'];
-
-            echo "<br>\n";
-        }
-    } else {
-        echo '<h1>The patient does not exist</h1>';
-    }
-
-    //$dbh = null;
-} catch (PDOException $e) {
-    /*** echo the sql statement and error message ***/
-    echo $e->getMessage();
-}
-
+    include 'pdo.inc.php';
+    echo '<a> Welcome Dr. '.$_SESSION['user'].'</a>';
 ?>
-	<h2> Exercise 1</h2> Buttons for displaying just an alert.<br>
-	<button onclick="alert('Temperature');">Temperature</button>
-	<button onclick="alert('Pulse');">Pulse</button><button onclick="alert('Activity');">Activity</button>
 
-	<br>
-	<script>
-		function writeMessage(msg) {
-			document.getElementById("sign").textContent = msg;
-		}
-	</script>
-	<h3 id="sign">Test </h3> Buttons for displaying in the previous H3 placeholder.<br>
-	<button onclick="writeMessage('Temperature');">Temperature</button>
-	<button onclick="writeMessage('Pulse');">Pulse</button><button onclick="writeMessage('Activity');">Activity</button>
-
-
-	<h2> Exercise 2</h2>
-	<script>
-		function displayVitalSigns(sign) {
-			var list = document.getElementsByClassName("signs");
-			for (var i in list) {
-				if (list[i].style !== undefined) {
-					list[i].style.display = "none";
-				}
-			}
-			var list2 = document.getElementsByClassName(sign);
-			if (list2) {
-				for (var i2 in list2) {
-					if (list2[i2].style !== undefined) {
-						list2[i2].style.display = "block";
-					}
-				}
-			} else {
-				alert('no list');
-			}
-		}
-	</script>
-	<style>
-		.Temperature {
-			display: none;
-		}
-
-		.Pulse {
-			display: none;
-		}
-
-		.Activity {
-			display: none;
-
-		}
-	</style>
-
-	Buttons for displaying just an alert.<br>
-	<button onclick="displayVitalSigns('Temperature');">Temperature</button>
-	<button onclick="displayVitalSigns('Pulse');">Pulse</button><button onclick="displayVitalSigns('Activity');">Activity</button>
+<div class="container">
+	<h2>Vital Signs List</h2>
 
 	<?php
-  try {
-      if ($patientID > 0) {
-          $sql = 'SELECT name, first_name, value, time, sign_name
-  FROM patient, vital_sign, sign
-  WHERE patient.patientID = vital_sign.patientID
-    AND vital_sign.signID = sign.signID
-    AND patient.patientID = :patientID';
+        try {
+            $dbh = new PDO("mysql:host=$hostname;dbname=$dbname", $username, $password);
 
-          $statement = $dbh->prepare($sql);
-          $statement->bindParam(':patientID', $patientID, PDO::PARAM_INT);
-          $result = $statement->execute();
+            $patientID = 0;
+            if (isset($_GET['id'])) {
+                $patientID = (int) ($_GET['id']);
+            }
+            if ($patientID > 0) {
+                $sql0 = 'SELECT name, first_name
+	                 FROM patient
+	                 WHERE patient.patientID = :patientID';
 
-          while ($line = $statement->fetch()) {
-              echo "<div class='signs ".$line['sign_name']."'>".$line['value'].' at '.$line['time']."</div>\n";
-          }
-      } else {
-          echo '<h1>The patient does not exist</h1>';
-      }
+                $statement0 = $dbh->prepare($sql0);
+                $statement0->bindParam(':patientID', $patientID, PDO::PARAM_INT);
+                $result0 = $statement0->execute();
 
-      $dbh = null;
-  } catch (PDOException $e) {
-      /*** echo the sql statement and error message ***/
-      echo $e->getMessage();
-  }
+                while ($line = $statement0->fetch()) {
+                    echo '<h2> Patient: '.$line['first_name'].'  '.$line['name'].'</h2>';
+                    echo '<h5>Select a Sign:</h5>';
+                }
+            }
+        } catch (PDOException $e) {
+            /*** echo the sql statement and error message ***/
+            echo $e->getMessage();
+        }	?>
+	<div class="btn-group" style="width:100%">
+		<button class="btn-primary" onclick="displayVitalSigns('temperature');">Temperature</button>
+		<button class="btn-primary" onclick="displayVitalSigns('pulse');">Pulse</button>
+		<button class="btn-primary" onclick="displayVitalSigns('activity');">Activity</button>
+		<button class="btn-primary" onclick="displayVitalSigns('bloodpressure');">Blood Pressure</button>
+		<h2>Medicaments List</h2>
+		<button class="btn-primary" onclick="displayMedicaments('Medicament');">Medicament</button>
+	</div>
 
-  ?>
+	<h3>Settings</h3>
+	<p>Add a Medication</p>
+	<button class="btn-primary" id="addValue">
+    <i class="fas fa-user-plus"></i> Add New Medicament</button>
+</div>
 
-		<br />
-		<i><a href="logout.php">Logout</a></i>
+
+<div class="main">
+	<h2>Vital signs</h2>
+	<?php
+        if ($patientID > 0) {
+            $sql = 'SELECT sign.signID, sign_name, value, time, note
+	            FROM patient, vital_sign, sign
+	            WHERE patient.patientID = vital_sign.patientID
+	            AND vital_sign.signID = sign.signID';
+
+            $statement = $dbh->prepare($sql);
+            $statement->bindParam(':patientID', $patientID, PDO::PARAM_INT);
+            $result = $statement->execute();
+
+            $i = 0;
+            while ($line = $statement->fetch()) {
+                if (0 == $i) {
+                    echo "<table id='".strtolower($line['sign_name'])."' class='signs'>";
+                    ++$i;
+                } elseif ($line['signID'] > $i) {
+                    echo '</table>';
+                    echo "<table id='".strtolower($line['sign_name'])."' class='signs'>";
+                    ++$i;
+                }
+                echo '<tr>';
+                echo '<td>'.$line['sign_name'].'</td>';
+                echo '<td>'.$line['value'].'</td>';
+                echo '<td>'.$line['time'].'</td>';
+                echo '<td>'.$line['note'].'</td>';
+                echo '</tr>';
+            }
+            echo '</table>';
+            echo '<div id="warning" class="signs">No List exists</div>';
+        } else {
+            echo '<h1>The patient does not exist</h1>';
+        }
+    ?>
+</div>
+
+<script>
+	function displayVitalSigns(sign) {
+		var list = document.getElementsByClassName("signs");
+		for (var i = 0; i < list.length; i++) {
+			list[i].style.display = "none";
+		}
+		try {
+			document.getElementById(sign).style.display = "table";
+		} catch (err) {
+			document.getElementById('warning').style.display = "block";
+		}
+
+	}
+</script>
 
 <?php include 'template/footer.php'; ?>
