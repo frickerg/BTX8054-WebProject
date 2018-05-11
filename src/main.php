@@ -1,5 +1,7 @@
 
 <?php
+include 'template/base.php';
+
 session_start();
 // Initialisation of passwords for the database
 include 'pdo.inc.php';
@@ -60,58 +62,34 @@ if (!$logged) {
     }
 }
 
-?>
-
-<!DOCTYPE html>
-<html lang="de">
-
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-	<title>BFH - Login</title>
-
-	<!-- Bootstrap -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-		crossorigin="anonymous">
-	<link rel="stylesheet" href="css/custom.css">
-</head>
-
-<body>
-	<?php
-    // the form is only displayed if the person is not logged.
-    if (!$logged) {
-        ?>
-		<section id="loginSection">
-			<div class="container">
-				<div class="text-center">
-					<img id="logoMain" class="img-responsive" src="img/logo.png" alt="BFH - Bern University Of Applied Sciences">
-				</div>
-				<div class="row" id="loginForm">
-					<form method="POST">
-						<div class="form-group col-xs-12">
-							<label for="user" class="col-sm-2 col-form-label">Username</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="user" name="user" placeholder="Username">
-							</div>
-						</div>
-						<div class="form-group col-xs-12">
-							<label for="password" class="col-sm-2 col-form-label">Password</label>
-							<div class="col-sm-10">
-								<input type="password" class="form-control" id="pwd" name="pwd" placeholder="Password">
-								<input class="btn btn-primary pull-right" id="loginBtn" type="submit" value="Login">
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</section>
-	<?php
-        echo "<b>$message</b>";
-    }
+// the form is only displayed if the person is not logged.
+if (!$logged) {
     ?>
-</body>
+	<div class="container">
+		<div class="text-center">
+			<img id="logoMain" class="img-responsive" src="img/logo.png" alt="BFH - Bern University Of Applied Sciences">
+		</div>
+		<div class="row" id="loginForm">
+			<form method="POST">
+				<div class="form-group col-xs-12">
+					<label for="user" class="col-sm-2 col-form-label">Username</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="user" name="user" placeholder="Username">
+					</div>
+				</div>
+				<div class="form-group col-xs-12">
+					<label for="password" class="col-sm-2 col-form-label">Password</label>
+					<div class="col-sm-10">
+						<input type="password" class="form-control" id="pwd" name="pwd" placeholder="Password">
+						<input class="btn btn-primary pull-right" id="loginBtn" type="submit" value="Login">
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+<?php
+    echo "<b>$message</b>";
+}
 
-</html>
+include 'template/footer.php';
+?>

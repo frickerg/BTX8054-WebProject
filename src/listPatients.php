@@ -1,4 +1,6 @@
 <?php
+include 'template/base.php';
+
 session_start();
 
 // First, we test if user is logged. If not, goto main.php (login page).
@@ -34,3 +36,5 @@ echo '<br>User ='.$_SESSION['user'];
 ?>
 <br />
 <i><a href="logout.php">Logout</a></i>
+
+<?php include 'template/footer.php'; ?>

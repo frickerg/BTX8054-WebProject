@@ -1,4 +1,6 @@
 <?php
+include 'template/base.php';
+
 session_start();
 // Initialisation of passwords for the database
 include 'pdo.inc.php';
@@ -67,4 +69,5 @@ if (!$logged) {
         echo "<a href='logout.php'>Logout</a>";
     }
 
+    include 'template/footer.php';
   ?>
