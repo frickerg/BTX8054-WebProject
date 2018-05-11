@@ -1,12 +1,34 @@
 <?php include 'template/base.php'; ?>
 
-<div class="navbar">
-	<a href="listPatients.php">Home</a>
-	<a href="logout.php">Logout</a>
-</div>
+<nav class="navbar navbar-default">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">
+				<img class="img-responsive" src="img/logo.png" alt="BFH - Bern University Of Applied Sciences">
+			</a>
 
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+            </button>
+		</div>
+		<div id="navbar" class="navbar-collapse collapse">
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="listPatients.php">Home</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="logout.php">Logout</a></li>
+			</ul>
+		</div>
+		<!--/.nav-collapse -->
+	</div>
+	<!--/.container-fluid -->
+</nav>
+<div class="container">
 
-<?php
+	<?php
     session_start();
     // First, we test if user is logged. If not, goto main.php (login page).
     if (!isset($_SESSION['user'])) {
@@ -17,10 +39,10 @@
     echo '<a> Welcome Dr. '.$_SESSION['user'].'</a>';
 ?>
 
-<div class="container">
-	<h2>Vital Signs List</h2>
+		<div class="container">
+			<h2>Vital Signs List</h2>
 
-	<?php
+			<?php
         try {
             $dbh = new PDO("mysql:host=$hostname;dbname=$dbname", $username, $password);
 
@@ -46,25 +68,25 @@
             /*** echo the sql statement and error message ***/
             echo $e->getMessage();
         }	?>
-	<div class="btn-group" style="width:100%">
-		<button class="btn-primary" onclick="displayVitalSigns('temperature');">Temperature</button>
-		<button class="btn-primary" onclick="displayVitalSigns('pulse');">Pulse</button>
-		<button class="btn-primary" onclick="displayVitalSigns('activity');">Activity</button>
-		<button class="btn-primary" onclick="displayVitalSigns('bloodpressure');">Blood Pressure</button>
-		<h2>Medicaments List</h2>
-		<button class="btn-primary" onclick="displayMedicaments('Medicament');">Medicament</button>
-	</div>
+				<div class="btn-group" style="width:100%">
+					<button class="btn-primary" onclick="displayVitalSigns('temperature');">Temperature</button>
+					<button class="btn-primary" onclick="displayVitalSigns('pulse');">Pulse</button>
+					<button class="btn-primary" onclick="displayVitalSigns('activity');">Activity</button>
+					<button class="btn-primary" onclick="displayVitalSigns('bloodpressure');">Blood Pressure</button>
+					<h2>Medicaments List</h2>
+					<button class="btn-primary" onclick="displayMedicaments('Medicament');">Medicament</button>
+				</div>
 
-	<h3>Settings</h3>
-	<p>Add a Medication</p>
-	<button class="btn-primary" id="addValue">
+				<h3>Settings</h3>
+				<p>Add a Medication</p>
+				<button class="btn-primary" id="addValue">
     <i class="fas fa-user-plus"></i> Add New Medicament</button>
-</div>
+		</div>
 
 
-<div class="main">
-	<h2>Vital signs</h2>
-	<?php
+		<div class="main">
+			<h2>Vital signs</h2>
+			<?php
         if ($patientID > 0) {
             $sql = 'SELECT sign.signID, sign_name, value, time, note
 	            FROM patient, vital_sign, sign
@@ -98,6 +120,7 @@
             echo '<h1>The patient does not exist</h1>';
         }
     ?>
+		</div>
 </div>
 
 <script>

@@ -3,11 +3,18 @@
 	margin: 0;
 }
 
+.placeholder1 {
+	color: #036eb8;
+}
+
+.placeholder2 {
+	color: #f44336;
+}
+
 body {
 	font-family: Noto Sans;
 	padding: 0;
 	min-width:320px;
-	max-width:1200px;
 	margin: 0 auto;
 }
 
@@ -20,8 +27,11 @@ body {
 	height: auto;
 }
 
-#loginForm {
+#loginForm, .navbar-brand>img {
 	border: 1px solid rgba(0,0,0,.125);
+}
+
+#loginForm {
 	border-radius: .25rem;
 	padding: 40px 20px;
 	display: block;
@@ -45,4 +55,23 @@ body {
     border: 1px solid red;
     border-radius: 5px;
     color: red;
+}
+
+.navbar-brand {
+    height: fit-content;
+}
+
+.navbar-brand>img {
+    display: block;
+    height: 64px;
+    border-radius: 12px;
+    padding: 8px;
+    background-color: white;
+	margin-right: 32px;
+}
+
+.navbar-default .navbar-nav>li>a {
+    line-height: 64px;
+    padding: 0px 55px;
+    margin-top: 16px;
 }
