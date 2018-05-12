@@ -69,12 +69,32 @@ body {
     color: red;
 }
 
+.patient-portrait {
+	border: 7px solid #e7e7e7;
+	width: 112px;
+    height: 112px;
+	-webkit-background-size: cover !important;
+    -moz-background-size: cover !important;
+    -o-background-size: cover !important;
+    background-size: cover !important;
+}
+
+.nospace {
+	padding: 0;
+	margin: 0;
+}
+
 .navbar {
 	height: 100px;
 }
 
 #sidebar {
 	min-height: calc(100vh - 120px);
+	border-right: 1px solid #e7e7e7;
+}
+
+#main {
+    padding-left: 40px;
 }
 
 .navbar-brand {
@@ -94,4 +114,8 @@ body {
     line-height: 64px;
     padding: 0px 55px;
     margin-top: 16px;
+}
+
+.patientinfo {
+	margin: 30px 0;
 }

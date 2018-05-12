@@ -1,4 +1,13 @@
-<?php include 'template/base.php'; ?>
+<?php include 'template/base.php';
+
+    session_start();
+    // First, we test if user is logged. If not, goto main.php (login page).
+    if (!isset($_SESSION['user'])) {
+        header('Location: index.php');
+        exit();
+    }
+    include 'pdo.inc.php';
+?>
 
 <nav class="navbar navbar-default">
 	<div class="container-fluid">
@@ -19,6 +28,9 @@
 				<li class="active"><a href="listPatients.php">Home</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
+				<li>
+					<?php echo '<a>You are logged in as <b>'.$_SESSION['user'].'</b></a>'; ?>
+				</li>
 				<li><a href="logout.php">Logout</a></li>
 			</ul>
 		</div>
@@ -27,27 +39,9 @@
 	<!--/.container-fluid -->
 </nav>
 
-<?php
-    session_start();
-    // First, we test if user is logged. If not, goto main.php (login page).
-    if (!isset($_SESSION['user'])) {
-        header('Location: index.php');
-        exit();
-    }
-    include 'pdo.inc.php';
-?>
-<div class="container" id="sidebar">
+<div class="container">
 	<div class="row">
-		<div class="col-xs-12">
-			<?php
-            echo '<a> Welcome Dr. '.$_SESSION['user'].'</a>';
-            ?>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-lg-4">
-			<h2>Vital Signs List</h2>
-
+		<div id="sidebar" class="col-md-4">
 			<?php
             try {
                 $dbh = new PDO("mysql:host=$hostname;dbname=$dbname", $username, $password);
@@ -57,7 +51,7 @@
                     $patientID = (int) ($_GET['id']);
                 }
                 if ($patientID > 0) {
-                    $sql0 = 'SELECT name, first_name
+                    $sql0 = 'SELECT *
 		                 FROM patient
 		                 WHERE patient.patientID = :patientID';
 
@@ -66,8 +60,16 @@
                     $result0 = $statement0->execute();
 
                     while ($line = $statement0->fetch()) {
-                        echo '<h2> Patient: '.$line['first_name'].'  '.$line['name'].'</h2>';
-                        echo '<h5>Select a Sign:</h5>';
+                        echo '<h1>Patient - Vital Signs</h1>';
+                        echo'<div class="patientinfo row">';
+                        echo '<div class="col-xs-4 nospace">';
+                        echo '<div class="img-circle patient-portrait" style="background: url(img/patient/'.strtolower($line['first_name'].$line['name']).'.jpg) no-repeat center center"></div>';
+                        echo '</div>';
+                        echo '<div class="col-xs-8">';
+                        echo '<h3>'.$line['first_name'].'  '.$line['name'].'</h3>';
+                        echo '<p>'.$line['gender'].'<br/>'.$line['birthdate'].'</p>';
+                        echo '</div>';
+                        echo '</div>';
                     }
                 }
             } catch (PDOException $e) {
@@ -76,6 +78,7 @@
             }
             ?>
 			<div class="btn-group" style="width:100%">
+				<p>Select a Sign:</p>
 				<button class="btn-light" onclick="displayVitalSigns('Temperature');">Temperature</button>
 				<button class="btn-light" onclick="displayVitalSigns('Pulse');">Pulse</button>
 				<button class="btn-light" onclick="displayVitalSigns('Activity');">Activity</button>
@@ -91,7 +94,7 @@
 			</button>
 		</div>
 
-		<div class="col-lg-8">
+		<div id="main" class="col-md-8">
 			<h2 id="signTitle"></h2>
 			<?php
                 if ($patientID > 0) {
