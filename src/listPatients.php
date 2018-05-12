@@ -10,6 +10,7 @@ if (!isset($_SESSION['user'])) {
 }
 
 include 'pdo.inc.php';
+include 'template/navigator.php';
 
 try {
     $dbh = new PDO("mysql:host=$hostname;dbname=$dbname", $username, $password);
