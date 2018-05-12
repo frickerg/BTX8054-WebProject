@@ -81,7 +81,7 @@ if (!$logged) {
 					<label for="password" class="col-sm-2 col-form-label">Password</label>
 					<div class="col-sm-10">
 						<input type="password" class="form-control" id="pwd" name="pwd" placeholder="Password">
-						<input class="btn btn-primary pull-right" id="loginBtn" type="submit" value="Login">
+						<input class="btn btn-primary" id="loginBtn" type="submit" value="Login">
 					</div>
 				</div>
 			</form>

@@ -41,11 +41,11 @@ body {
 	height: auto;
 }
 
-#loginForm, .navbar-brand>img {
+#loginForm, #logout, .navbar-brand>img {
 	border: 1px solid rgba(0,0,0,.125);
 }
 
-#loginForm {
+#logout, #loginForm {
 	border-radius: .25rem;
 	padding: 40px 20px;
 	display: block;
@@ -54,10 +54,17 @@ body {
 	margin: 0 auto;
 }
 
-#loginBtn  {
+#logout h1 {
+	margin-bottom: 40px;
+	text-transform: uppercase;
+	letter-spacing: 0.5rem;
+}
+
+#loginBtn, #logoutBtn  {
 	width: 150px;
 	margin-top: 40px;
 }
+
 
 .btn-light {
 	padding: 7px 11px;
@@ -90,6 +97,11 @@ body {
 .patient-portrait {
 	width: 7.5rem;
     height: 7.5rem;
+}
+
+.card {
+	max-width: 292px;
+	margin-bottom: 2rem;
 }
 
 .card-img-top {

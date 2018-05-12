@@ -16,7 +16,6 @@ try {
     $dbh = new PDO("mysql:host=$hostname;dbname=$dbname", $username, $password);
     /*** echo a message saying we have connected ***/
     echo '<div class="container">';
-    echo '<h1>List of patients</h1>';
     $sql = 'select * from patient';
 
     $result = $dbh->query($sql);
