@@ -45,6 +45,18 @@ body {
 	margin-top: 40px;
 }
 
+.btn-light {
+	padding: 7px 11px;
+    border-radius: 20px;
+    background-color: #fafafa;
+    margin: 6px 6px 6px 0px;
+    border: 1px solid #e7e7e7;
+}
+
+.btn-light:hover {
+	background-color: #e7e7e7;
+}
+
 .signs {
     display: none;
 }
@@ -55,6 +67,14 @@ body {
     border: 1px solid red;
     border-radius: 5px;
     color: red;
+}
+
+.navbar {
+	height: 100px;
+}
+
+#sidebar {
+	min-height: calc(100vh - 120px);
 }
 
 .navbar-brand {
