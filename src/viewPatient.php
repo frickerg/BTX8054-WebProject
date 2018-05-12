@@ -9,34 +9,28 @@
     include 'pdo.inc.php';
 ?>
 
-<nav class="navbar navbar-default">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<a class="navbar-brand" href="#">
-				<img class="img-responsive" src="img/logo.png" alt="BFH - Bern University Of Applied Sciences">
-			</a>
-
-			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-            </button>
-		</div>
-		<div id="navbar" class="navbar-collapse collapse">
-			<ul class="nav navbar-nav">
-				<li class="active"><a href="listPatients.php">Home</a></li>
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<li>
-					<?php echo '<a>You are logged in as <b>'.$_SESSION['user'].'</b></a>'; ?>
-				</li>
-				<li><a href="logout.php">Logout</a></li>
-			</ul>
-		</div>
-		<!--/.nav-collapse -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<a class="navbar-brand" href="#">
+		<img class="img-responsive" src="img/logo.png" alt="BFH - Bern University Of Applied Sciences">
+	</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item active">
+				<a class="nav-link" href="listPatients.php">Home <span class="sr-only">(current)</span></a>
+			</li>
+		</ul>
+		<ul class="navbar-nav navbar-right">
+			<li class="nav-item">
+				<?php echo '<a class="nav-link">You are logged in as <b>'.$_SESSION['user'].'</b></a>'; ?>
+			</li>
+			<li class="nav-item active">
+				<a class="nav-link" href="logout.php">Logout</a>
+			</li>
+		</ul>
 	</div>
-	<!--/.container-fluid -->
 </nav>
 
 <div class="container">
@@ -62,10 +56,10 @@
                     while ($line = $statement0->fetch()) {
                         echo '<h1>Patient - Vital Signs</h1>';
                         echo'<div class="patientinfo row">';
-                        echo '<div class="col-xs-4 nospace">';
-                        echo '<div class="img-circle patient-portrait" style="background: url(img/patient/'.strtolower($line['first_name'].$line['name']).'.jpg) no-repeat center center"></div>';
+                        echo '<div class="col-4">';
+                        echo '<div class="rounded-circle patient-portrait img-responsive" style="background: url(img/patient/'.strtolower($line['first_name'].$line['name']).'.jpg) no-repeat center center"></div>';
                         echo '</div>';
-                        echo '<div class="col-xs-8">';
+                        echo '<div class="col-8">';
                         echo '<h3>'.$line['first_name'].'  '.$line['name'].'</h3>';
                         echo '<p>'.$line['gender'].'<br/>'.$line['birthdate'].'</p>';
                         echo '</div>';
@@ -77,19 +71,20 @@
                 echo $e->getMessage();
             }
             ?>
-			<div class="btn-group" style="width:100%">
 				<p>Select a Sign:</p>
-				<button class="btn-light" onclick="displayVitalSigns('Temperature');">Temperature</button>
-				<button class="btn-light" onclick="displayVitalSigns('Pulse');">Pulse</button>
-				<button class="btn-light" onclick="displayVitalSigns('Activity');">Activity</button>
-				<button class="btn-light" onclick="displayVitalSigns('Blood Pressure');">Blood Pressure</button>
+				<div class="btn-group" style="width:100%">
+					<button class="btn-light" onclick="displayVitalSigns('Temperature');">Temperature</button>
+					<button class="btn-light" onclick="displayVitalSigns('Pulse');">Pulse</button>
+					<button class="btn-light" onclick="displayVitalSigns('Activity');">Activity</button>
+					<button class="btn-light" onclick="displayVitalSigns('Blood Pressure');">Blood Pressure</button>
+				</div>
 				<h2>Medicaments List</h2>
-				<button class="btn-light" onclick="displayMedicaments('Medicament');">Medicament</button>
-			</div>
-
-			<h3>Settings</h3>
-			<p>Add a Medication</p>
-			<button class="btn-light" id="addValue">
+				<div class="btn-group" style="width:100%">
+					<button class="btn-light" onclick="displayMedicaments('Medicament');">Medicament</button>
+				</div>
+				<h3>Settings</h3>
+				<p>Add a Medication</p>
+				<button class="btn-light" id="addValue">
 				<i class="fas fa-user-plus"></i>&nbsp;Add New Medicament
 			</button>
 		</div>

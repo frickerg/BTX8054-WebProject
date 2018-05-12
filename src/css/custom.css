@@ -3,6 +3,16 @@
 	margin: 0;
 }
 
+html {
+	font-size: 12px;
+}
+
+.h1, h1 { font-size: 2.0rem; }
+.h2, h2 { font-size: 1.75rem; }
+.h3, h3 { font-size: 1.50rem; }
+.h4, h4 { font-size: 1.25rem; }
+.h5, h5 { font-size: 1.0rem; }
+
 .placeholder1 {
 	color: #036eb8;
 }
@@ -16,6 +26,10 @@ body {
 	padding: 0;
 	min-width:320px;
 	margin: 0 auto;
+}
+
+.container {
+    margin-top: 2.5rem;
 }
 
 #logoMain {
@@ -57,6 +71,10 @@ body {
 	background-color: #e7e7e7;
 }
 
+.btn-group {
+	display: inline-block;
+}
+
 .signs {
     display: none;
 }
@@ -70,8 +88,8 @@ body {
 }
 
 .patient-portrait {
-	width: 112px;
-    height: 112px;
+	width: 7.5rem;
+    height: 7.5rem;
 }
 
 .card-img-top {
@@ -80,20 +98,11 @@ body {
 }
 
 .patient-portrait, .card-img-top {
-	border: 7px solid #e7e7e7;
+	border: 0.5rem solid #e7e7e7;
 	-webkit-background-size: cover !important;
 	-moz-background-size: cover !important;
 	-o-background-size: cover !important;
 	background-size: cover !important;
-}
-
-.nospace {
-	padding: 0;
-	margin: 0;
-}
-
-.navbar {
-	height: 100px;
 }
 
 #sidebar {
@@ -105,12 +114,7 @@ body {
     padding-left: 40px;
 }
 
-.navbar-brand {
-    height: fit-content;
-}
-
 .navbar-brand>img {
-    display: block;
     height: 64px;
     border-radius: 12px;
     padding: 8px;
@@ -118,12 +122,7 @@ body {
 	margin-right: 32px;
 }
 
-.navbar-default .navbar-nav>li>a {
-    line-height: 64px;
-    padding: 0px 55px;
-    margin-top: 16px;
-}
-
 .patientinfo {
-	margin: 30px 0;
+	margin: 0 -15px;
+    padding: 30px 0;
 }

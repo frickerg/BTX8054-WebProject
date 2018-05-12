@@ -21,9 +21,9 @@ try {
     $result = $dbh->query($sql);
     echo '<div class="row">';
     while ($line = $result->fetch()) {
-        echo '<div class="col-xs-12 col-sm-6 col-lg-4">';
+        echo '<div class="col-12 col-sm-6 col-lg-4">';
         echo '<div class="card">';
-        echo '<div class="card-img-top img-responsive" style="background: url(img/patient/'.strtolower($line['first_name'].$line['name']).'.jpg) no-repeat center center"></div>';
+        echo '<div class="card-img-top" style="background: url(img/patient/'.strtolower($line['first_name'].$line['name']).'.jpg) no-repeat center center"></div>';
         echo '<div class="card-body">';
         echo '<h2 class="card-title">'.$line['first_name'].' '.$line['name'].'</h2>';
         echo '<p class="card-text">lorem ipsum</p>';
