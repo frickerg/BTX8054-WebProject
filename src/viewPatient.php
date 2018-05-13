@@ -13,99 +13,65 @@
 <div class="container">
 	<div class="row">
 		<div id="sidebar" class="col-md-4">
-			<?php
-            try {
-                $dbh = new PDO("mysql:host=$hostname;dbname=$dbname", $username, $password);
+			<h1>Patient Overview</h1>
+			<div class="patientinfo row">
+				<?php
+                    buildUserCard();
+                ?>
+			</div>
+			<h2>Vital Signs</h2>
+			<p>Select a Sign:</p>
+			<div class="btn-group" style="width:100%">
+				<button class="btn-light" onclick="displayVitalSigns('Temperature');">Temperature</button>
+				<button class="btn-light" onclick="displayVitalSigns('Pulse');">Pulse</button>
+				<button class="btn-light" onclick="displayVitalSigns('Activity');">Activity</button>
+				<button class="btn-light" onclick="displayVitalSigns('Blood Pressure');">Blood Pressure</button>
+			</div>
+			<h2>Medication List</h2>
+			<div class="btn-group" style="width:100%">
+				<button class="btn-light" onclick="displayVitalSigns('Medicament');">Display All</button>
+			</div>
+			<p>Add a Medication</p>
+			<button class="btn-light" id="addValue" data-toggle="modal" data-target="#addMedication">
+					<i class="fas fa-user-plus"></i>&nbsp;Add New Medication
+				</button>
 
-                $patientID = 0;
-                if (isset($_GET['id'])) {
-                    $patientID = (int) ($_GET['id']);
-                }
-                if ($patientID > 0) {
-                    $sql0 = 'SELECT *
-		                 FROM patient
-		                 WHERE patient.patientID = :patientID';
-
-                    $statement0 = $dbh->prepare($sql0);
-                    $statement0->bindParam(':patientID', $patientID, PDO::PARAM_INT);
-                    $result0 = $statement0->execute();
-
-                    while ($line = $statement0->fetch()) {
-                        echo '<h1>Patient - Vital Signs</h1>';
-                        echo'<div class="patientinfo row">';
-                        echo '<div class="col-4">';
-                        echo '<div class="rounded-circle patient-portrait img-responsive" style="background: url(img/patient/'.strtolower($line['first_name'].$line['name']).'.jpg) no-repeat center center"></div>';
-                        echo '</div>';
-                        echo '<div class="col-8">';
-                        echo '<h3>'.$line['first_name'].'  '.$line['name'].'</h3>';
-                        echo '<p>'.$line['gender'].'<br/>'.$line['birthdate'].'</p>';
-                        echo '</div>';
-                        echo '</div>';
-                    }
-                }
-            } catch (PDOException $e) {
-                /*** echo the sql statement and error message ***/
-                echo $e->getMessage();
-            }
-            ?>
-				<p>Select a Sign:</p>
-				<div class="btn-group" style="width:100%">
-					<button class="btn-light" onclick="displayVitalSigns('Temperature');">Temperature</button>
-					<button class="btn-light" onclick="displayVitalSigns('Pulse');">Pulse</button>
-					<button class="btn-light" onclick="displayVitalSigns('Activity');">Activity</button>
-					<button class="btn-light" onclick="displayVitalSigns('Blood Pressure');">Blood Pressure</button>
+			<!-- Modal -->
+			<div class="modal fade" id="addMedication" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+						</div>
+						<div class="modal-body">
+							...
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary">Save changes</button>
+						</div>
+					</div>
 				</div>
-				<h2>Medication List</h2>
-				<div class="btn-group" style="width:100%">
-					<button class="btn-light" onclick="displayMedicaments('Medicament');">Display All</button>
-				</div>
-				<p>Add a Medication</p>
-				<button class="btn-light" id="addValue">
-				<i class="fas fa-user-plus"></i>&nbsp;Add New Medication
-			</button>
+			</div>
 		</div>
 
 		<div id="main" class="col-md-8">
 			<h2 id="signTitle"></h2>
 			<?php
-                if ($patientID > 0) {
-                    $sql = "SELECT sign.signID, sign_name, value, time, note
-			            FROM patient, vital_sign, sign
-			            WHERE patient.patientID = $patientID
-						AND patient.patientID = vital_sign.patientID
-			            AND vital_sign.signID = sign.signID";
-
-                    $statement = $dbh->prepare($sql);
-                    $statement->bindParam(':patientID', $patientID, PDO::PARAM_INT);
-                    $result = $statement->execute();
-
-                    $i = 0;
-                    while ($line = $statement->fetch()) {
-                        if ($line['signID'] > $i) {
-                            echo '</table>';
-                        }
-                        if ($line['signID'] > $i) {
-                            echo '<table class="table table-striped signs" id="'.$line['sign_name'].'">';
-                            echo '<tr>';
-                            echo '<th>Vital Sign</th>';
-                            echo '<th>Value</th>';
-                            echo '<th>Time</th>';
-                            echo '<th>Note</th>';
-                            echo '</tr>';
-                            ++$i;
-                        }
-                        echo '<tr>';
-                        echo '<td>'.$line['sign_name'].'</td>';
-                        echo '<td>'.$line['value'].'</td>';
-                        echo '<td>'.$line['time'].'</td>';
-                        echo '<td>'.$line['note'].'</td>';
-                        echo '</tr>';
-                    }
-                    echo '</table>';
-                    echo '<div id="warning" class="signs">No List exists</div>';
-                } else {
-                    echo '<h1>The patient does not exist</h1>';
-                }
+                $vitalQuery = "SELECT sign.signID, sign_name, value, time, note
+					FROM patient, vital_sign, sign
+					WHERE patient.patientID = $patientID
+					AND patient.patientID = vital_sign.patientID
+					AND vital_sign.signID = sign.signID";
+                executeQuery($vitalQuery);
+                $medQuery = "SELECT m.medicineID, m.medicamentID, m.time, m.quantity, me.medicament_name, m.note
+							FROM medicine m, medicament me
+							WHERE m.medicineID = me.medicamentID
+							AND m.patientID = $patientID";
+                executeMedQuery($medQuery);
             ?>
 		</div>
 	</div>

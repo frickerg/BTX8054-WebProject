@@ -1,4 +1,5 @@
 <?php
+
 /*** mysql hostname ***/
 $hostname = 'localhost';
 
@@ -9,4 +10,5 @@ $username = 'root';
 $password = '';
 
 $dbname = 'medizininformatik';
-?> 
+
+include 'template/queryHandler.php';
