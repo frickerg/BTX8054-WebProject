@@ -40,11 +40,6 @@ try {
     /*** echo the sql statement and error message ***/
     echo $e->getMessage();
 }
-
-echo '<br>User ='.$_SESSION['user'];
 ?>
-<br />
-<i><a href="logout.php">Logout</a></i>
-
 
 <?php include 'template/footer.php'; ?>
