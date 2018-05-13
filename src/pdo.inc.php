@@ -12,3 +12,5 @@ $password = '';
 $dbname = 'medizininformatik';
 
 include 'template/queryHandler.php';
+
+?>

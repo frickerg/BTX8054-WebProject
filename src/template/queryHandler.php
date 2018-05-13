@@ -104,3 +104,5 @@ function executeQuery($query)
 
     return $statement;
 }
+
+?>

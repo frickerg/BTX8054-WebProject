@@ -3,7 +3,7 @@
     session_start();
     // First, we test if user is logged. If not, goto main.php (login page).
     if (!isset($_SESSION['user'])) {
-        header('Location: index.php');
+        header('Location: main.php');
         exit();
     }
     include 'pdo.inc.php';
@@ -44,14 +44,16 @@
 					FROM patient, vital_sign, sign
 					WHERE patient.patientID = $patientID
 					AND patient.patientID = vital_sign.patientID
-					AND vital_sign.signID = sign.signID";
+					AND vital_sign.signID = sign.signID
+					ORDER BY id";
                 $vitalColumns = array('ID', 'Vital Sign', 'Value', 'Time', 'Note');
                 buildVitalDataTable($vitalQuery, $vitalColumns);
 
                 $medQuery = "SELECT m.medicineID as id, me.medicament_name as name, m.quantity, m.time, m.note
 					FROM medicine m, medicament me
 					WHERE m.medicamentID = me.medicamentID
-					AND m.patientID = $patientID";
+					AND m.patientID = $patientID
+					ORDER BY id";
                 $medColumns = array('ID', 'Medication Name', 'Quantity', 'Time', 'Note');
                 buildMedicamentTable($medQuery, $medColumns, 'Medicament');
             ?>
