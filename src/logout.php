@@ -17,8 +17,5 @@ unset($_SESSION['user']);
 		</div>
 	</div>
 </div>
-
-
-
-
- <?php include 'template/footer.php'; ?>
+</body>
+</html>

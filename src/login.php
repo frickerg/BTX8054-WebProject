@@ -69,5 +69,6 @@ if (!$logged) {
         echo "<a href='logout.php'>Logout</a>";
     }
 
-    include 'template/footer.php';
   ?>
+</body>
+</html>

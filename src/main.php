@@ -90,6 +90,6 @@ if (!$logged) {
 <?php
     echo "<b>$message</b>";
 }
-
-include 'template/footer.php';
 ?>
+</body>
+</html>
