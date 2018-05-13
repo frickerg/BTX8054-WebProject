@@ -28,7 +28,33 @@ function buildUserCard()
     }
 }
 
-function buildPatientDataTable($query, $columns, $id)
+function buildMedicamentTable($query, $columns, $id)
+{
+    global $patientID;
+    if ($patientID > 0) {
+        $statement = executeQuery($query);
+
+        echo '<table class="table table-striped signs" id="'.$id.'">';
+        echo '<tr>';
+        foreach ($columns as $value) {
+            echo "<th>$value</th>";
+        }
+        echo '</tr>';
+        while ($line = $statement->fetch()) {
+            echo '<tr>';
+            for ($i = 0; $i < count($columns); ++$i) {
+                echo "<td>$line[$i]</td>";
+            }
+            echo '</tr>';
+        }
+        echo '</table>';
+        echo '<div id="warning" class="signs">No List exists</div>';
+    } else {
+        echo '<div id="warning" class="signs">The patient does not exist</div>';
+    }
+}
+
+function buildVitalDataTable($query, $columns)
 {
     global $patientID;
     if ($patientID > 0) {
@@ -40,11 +66,7 @@ function buildPatientDataTable($query, $columns, $id)
                 echo '</table>';
             }
             if ($line['id'] > $currentID) {
-                if (is_null($id)) {
-                    echo '<table class="table table-striped signs" id="'.$line['name'].'">';
-                } else {
-                    echo '<table class="table table-striped signs" id="'.$id.'">';
-                }
+                echo '<table class="table table-striped signs" id="'.$line['name'].'">';
                 echo '<tr>';
                 foreach ($columns as $value) {
                     echo "<th>$value</th>";
@@ -81,17 +103,4 @@ function executeQuery($query)
     $result = $statement->execute();
 
     return $statement;
-}
-
-function executeInsertStatement($query)
-{
-    global $dbh;
-    $statement = $dbh->prepare($query);
-    $statement->bindParam(':patientID', $patientID, PDO::PARAM_INT);
-    $statement->execute();
-
-    echo "<meta http-equiv='refresh' content='0'>";
-
-    $statement->close();
-    $dbh->close();
 }

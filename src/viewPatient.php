@@ -46,14 +46,14 @@
 					AND patient.patientID = vital_sign.patientID
 					AND vital_sign.signID = sign.signID";
                 $vitalColumns = array('ID', 'Vital Sign', 'Value', 'Time', 'Note');
-                buildPatientDataTable($vitalQuery, $vitalColumns, null);
+                buildVitalDataTable($vitalQuery, $vitalColumns);
 
                 $medQuery = "SELECT m.medicineID as id, me.medicament_name as name, m.quantity, m.time, m.note
 					FROM medicine m, medicament me
-					WHERE m.medicineID = me.medicamentID
+					WHERE m.medicamentID = me.medicamentID
 					AND m.patientID = $patientID";
                 $medColumns = array('ID', 'Medication Name', 'Quantity', 'Time', 'Note');
-                buildPatientDataTable($medQuery, $medColumns, 'Medicament');
+                buildMedicamentTable($medQuery, $medColumns, 'Medicament');
             ?>
 		</div>
 	</div>

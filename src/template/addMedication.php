@@ -93,6 +93,6 @@ if (isset($_POST['submit'])) {
 
     $query = "INSERT INTO medicine (time, quantity, medicamentID, patientID, staffID_nurse, staffID_physician, note)
 	VALUES ('$dateTime',$quantity,$medID,$patientID,$nurseID,$physicianID,'$note')";
-    executeInsertStatement($query);
+    executeQuery($query);
 }
 ?>
