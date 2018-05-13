@@ -55,14 +55,13 @@
 					<button class="btn-light" onclick="displayVitalSigns('Activity');">Activity</button>
 					<button class="btn-light" onclick="displayVitalSigns('Blood Pressure');">Blood Pressure</button>
 				</div>
-				<h2>Medicaments List</h2>
+				<h2>Medication List</h2>
 				<div class="btn-group" style="width:100%">
-					<button class="btn-light" onclick="displayMedicaments('Medicament');">Medicament</button>
+					<button class="btn-light" onclick="displayMedicaments('Medicament');">Display All</button>
 				</div>
-				<h3>Settings</h3>
 				<p>Add a Medication</p>
 				<button class="btn-light" id="addValue">
-				<i class="fas fa-user-plus"></i>&nbsp;Add New Medicament
+				<i class="fas fa-user-plus"></i>&nbsp;Add New Medication
 			</button>
 		</div>
 

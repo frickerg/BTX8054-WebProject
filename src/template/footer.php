@@ -11,9 +11,6 @@
 					<li><a href="https://github.com/frickerg/BTX8054-WebProject"><i class="fab fa-github"></i>&nbsp;GitHub</a></li>
 		        </ul>
 			</div>
-			<div class="col-12 col-sm-8 offset-sm-4">
-				<div class="footer-copyright text-muted">&copy; 2018, Guillaume Fricker</div>
-			</div>
 		</div>
     </div>
 </footer>
