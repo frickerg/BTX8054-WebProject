@@ -33,31 +33,10 @@
 			</div>
 			<p>Add a Medication</p>
 			<button class="btn-light" id="addValue" data-toggle="modal" data-target="#addMedication">
-					<i class="fas fa-user-plus"></i>&nbsp;Add New Medication
-				</button>
-
-			<!-- Modal -->
-			<div class="modal fade" id="addMedication" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				          <span aria-hidden="true">&times;</span>
-				        </button>
-						</div>
-						<div class="modal-body">
-							...
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary">Save changes</button>
-						</div>
-					</div>
-				</div>
-			</div>
+				<i class="fas fa-user-plus"></i>&nbsp;Add New Medication
+			</button>
+			<?php include 'template/addMedication.php'; ?>
 		</div>
-
 		<div id="main" class="col-md-8">
 			<h2 id="signTitle"></h2>
 			<?php
@@ -93,5 +72,10 @@
 		document.getElementById('signTitle').innerHTML = sign;
 	}
 </script>
+<?php
+if (isset($_POST['submit'])) {
+                echo 'success!';
+            }
+?>
 
-<?php include 'template/footer.php'; ?>
+	<?php include 'template/footer.php'; ?>
