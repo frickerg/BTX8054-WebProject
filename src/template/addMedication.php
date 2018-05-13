@@ -13,17 +13,36 @@
 					<div class="form-group">
 						<label for="medicamentID">Medicament</label>
 						<select class="form-control" name="medicamentID">
-						  <option value="4">Adrenalin</option>
-						  <option value="2">Aspirin 1000 mg</option>
-						  <option value="1">Aspirin 500mg</option>
-						  <option value="3">Morphin</option>
+							<?php
+                                $query = 'SELECT medicamentID as id,
+									medicament_name as name
+									FROM medicament';
+                                addSelection($query);
+                            ?>
 					  </select>
 					</div>
 					<div class="form-group">
 						<label for="physicianID">Physician</label>
 						<select class="form-control" name="physicianID">
-							<option value="1">Gregory House</option>
-							<option value="2">James Wilson</option>
+							<?php
+                                $query = "SELECT staffID as id,
+									CONCAT(first_name, ' ', name) as name
+									FROM staff
+									WHERE fonctionID = 2";
+                                addSelection($query);
+                            ?>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="nurseID">Nurse</label>
+						<select class="form-control" name="nurseID">
+							<?php
+                                $query = "SELECT staffID as id,
+									CONCAT(first_name, ' ', name) as name
+									FROM staff
+									WHERE fonctionID = 1";
+                                addSelection($query);
+                            ?>
 						</select>
 					</div>
 					<div class="form-group">
@@ -44,7 +63,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-primary">Save Perscription</button>
+					<button type="submit" name="submit" class="btn btn-primary">Save Perscription</button>
 				</div>
 			</form>
 		</div>
@@ -52,12 +71,28 @@
 </div>
 
 <script>
-$(
-    function(){
-        $('#time').click(function(){
-			var time = moment().format('YYYY-MM-DDThh:mm:ss');
-            $('#time-holder').val(time);
-        });
-    }
-);
+	$(
+		function() {
+			$('#time').click(function() {
+				var time = moment().format('YYYY-MM-DDThh:mm');
+				$('#time-holder').val(time);
+			});
+		}
+	);
 </script>
+
+<?php
+global $staffID;
+if (isset($_POST['submit'])) {
+    $medID = $_POST['medicamentID'];
+    $quantity = $_POST['quantity'];
+    $note = $_POST['note'];
+    $physicianID = $_POST['physicianID'];
+    $nurseID = $_POST['nurseID'];
+    $dateTime = $_POST['dateTime'];
+
+    $query = "INSERT INTO medicine (time, quantity, medicamentID, patientID, staffID_nurse, staffID_physician, note)
+	VALUES ('$dateTime',$quantity,$medID,$patientID,$nurseID,$physicianID,'$note')";
+    executeInsertStatement($query);
+}
+?>

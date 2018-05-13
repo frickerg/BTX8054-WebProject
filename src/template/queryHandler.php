@@ -65,6 +65,14 @@ function buildPatientDataTable($query, $columns, $id)
     }
 }
 
+function addSelection($query)
+{
+    $statement = executeQuery($query);
+    while ($line = $statement->fetch()) {
+        echo '<option value="'.$line['id'].'">'.$line['name'].'</option>';
+    }
+}
+
 function executeQuery($query)
 {
     global $dbh;
@@ -73,4 +81,17 @@ function executeQuery($query)
     $result = $statement->execute();
 
     return $statement;
+}
+
+function executeInsertStatement($query)
+{
+    global $dbh;
+    $statement = $dbh->prepare($query);
+    $statement->bindParam(':patientID', $patientID, PDO::PARAM_INT);
+    $statement->execute();
+
+    echo "<meta http-equiv='refresh' content='0'>";
+
+    $statement->close();
+    $dbh->close();
 }

@@ -72,10 +72,5 @@
 		document.getElementById('signTitle').innerHTML = sign;
 	}
 </script>
-<?php
-if (isset($_POST['submit'])) {
-                echo 'success!';
-            }
-?>
 
-	<?php include 'template/footer.php'; ?>
+<?php include 'template/footer.php'; ?>
