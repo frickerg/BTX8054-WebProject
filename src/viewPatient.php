@@ -61,17 +61,20 @@
 		<div id="main" class="col-md-8">
 			<h2 id="signTitle"></h2>
 			<?php
-                $vitalQuery = "SELECT sign.signID, sign_name, value, time, note
+                $vitalQuery = "SELECT sign.signID as id, sign_name as name, value, time, note
 					FROM patient, vital_sign, sign
 					WHERE patient.patientID = $patientID
 					AND patient.patientID = vital_sign.patientID
 					AND vital_sign.signID = sign.signID";
-                executeQuery($vitalQuery);
-                $medQuery = "SELECT m.medicineID, m.medicamentID, m.time, m.quantity, me.medicament_name, m.note
-							FROM medicine m, medicament me
-							WHERE m.medicineID = me.medicamentID
-							AND m.patientID = $patientID";
-                executeMedQuery($medQuery);
+                $vitalColumns = array('ID', 'Vital Sign', 'Value', 'Time', 'Note');
+                buildPatientDataTable($vitalQuery, $vitalColumns, null);
+
+                $medQuery = "SELECT m.medicineID as id, me.medicament_name as name, m.quantity, m.time, m.note
+					FROM medicine m, medicament me
+					WHERE m.medicineID = me.medicamentID
+					AND m.patientID = $patientID";
+                $medColumns = array('ID', 'Medication Name', 'Quantity', 'Time', 'Note');
+                buildPatientDataTable($medQuery, $medColumns, 'Medicament');
             ?>
 		</div>
 	</div>
