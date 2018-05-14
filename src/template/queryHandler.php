@@ -105,4 +105,18 @@ function executeQuery($query)
     return $statement;
 }
 
+/* post on self: medication can be inserted into the database */
+if (isset($_POST['submit'])) {
+    $medID = $_POST['medicamentID'];
+    $quantity = $_POST['quantity'];
+    $note = $_POST['note'];
+    $physicianID = $_POST['physicianID'];
+    $nurseID = $_POST['nurseID'];
+    $dateTime = $_POST['dateTime'];
+
+    $query = "INSERT INTO medicine (time, quantity, medicamentID, patientID, staffID_nurse, staffID_physician, note)
+	VALUES ('$dateTime',$quantity,$medID,$patientID,$nurseID,$physicianID,'$note')";
+    executeQuery($query);
+}
+
 ?>
